@@ -5,7 +5,9 @@ package com.tankgamev2;/*
  */
 
 
-public class Tank {
+import javax.swing.*;
+
+public class Tank{
 
     //Tank Position
     public int x;
@@ -13,6 +15,7 @@ public class Tank {
     public int type;
     public int direct;
     public int speed;
+    public Bullet b;
 
 
     public Tank(int x,int y){
@@ -59,5 +62,29 @@ public class Tank {
     public void setSpeed(int speed){
         this.speed = speed;
     }
+
+    public void shot(){
+
+        switch (this.direct){
+            case 0:
+                b = new Bullet(x+10,y,0);
+                break;
+
+            case 1:
+                b = new Bullet(x+30,y+10,1);
+                break;
+
+            case 2:
+                b = new Bullet(x+10,y+30,2);
+                break;
+
+            case 3:
+                b = new Bullet(x,y+10,3);
+                break;
+                }
+        Thread t = new Thread(b);
+        t.start();
+    }
+
 
 }

@@ -11,7 +11,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Vector;
 
-public class MyTank extends JPanel implements KeyListener {
+public class MyTank extends JPanel implements KeyListener,Runnable
+{
 
     private PlayerTank pt;
     private Vector<EnemyTank> etv = new Vector<EnemyTank>();
@@ -38,6 +39,13 @@ public class MyTank extends JPanel implements KeyListener {
         this.drawGameField(g);
         //draw Player Tank
         this.drawTank(pt.getX(), pt.getY(), g, pt.getDirect(), pt.getType());
+
+        //Draw Player Player Bullet
+        if(pt.b!=null && pt.b.isAlive == true){
+            g.draw3DRect(pt.b.x,pt.b.y,1,1,false);
+        }
+
+
         //draw Enemy Tank
         for (int i = 0; i <enemySize ; i++) {
             this.drawTank(etv.get(i).getX(),etv.get(i).getY(),g,etv.get(i).getDirect(),etv.get(i).getType());
@@ -47,7 +55,6 @@ public class MyTank extends JPanel implements KeyListener {
     public void drawGameField(Graphics g) {
         g.fillRect(0, 0, 400, 300);
     }
-
 
     //Draw Tank Function
     public void drawTank(int x, int y, Graphics g, int direct, int type) {
@@ -148,10 +155,27 @@ public class MyTank extends JPanel implements KeyListener {
         }else{
             System.out.println("Not a direction key");
         }
+        if(e.getKeyCode()== KeyEvent.VK_SPACE){
+            pt.shot();
+        }
         this.repaint();
         }
 
     public void keyReleased(KeyEvent e) {
+
+    }
+
+    public void run() {
+
+        //Every 100ms repaint the Bullet
+        while(true){
+            try{
+                Thread.sleep(30);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            this.repaint();
+        }
 
     }
 }

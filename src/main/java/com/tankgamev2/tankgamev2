@@ -1,4 +1,3 @@
 Function:
 
-1. Draw our Tank(done).
-2. Use Keypad control our Tank move in four direction(done).
+1. Use Thread to let Tank shot Bullet.
