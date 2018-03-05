@@ -5,8 +5,6 @@ package com.tankgamev2;/*
  */
 
 
-import javax.swing.*;
-
 public class Tank{
 
     //Tank Position
